@@ -1,11 +1,3 @@
-//
-//  Twitter.h
-//  AndroidGame
-//
-//  Created by masuhajime on 2014/10/15.
-//
-//
-
 #ifndef AMOAMO_TWITTER_H
 #define AMOAMO_TWITTER_H
 
