@@ -1,7 +1,8 @@
 #include <definition.h>
 #if AMOAMO_PLATFORM_IS_IOS
 
-#include "Twitter.h"
+#include <definition.h>
+#include <amoamo/Twitter.h>
 
 #import "AppController.h"
 #import <Social/Social.h>

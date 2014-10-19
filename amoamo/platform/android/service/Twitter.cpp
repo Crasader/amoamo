@@ -1,14 +1,14 @@
-#include <definition.h>
+#include "amoamo/definition.h"
 #if AMOAMO_PLATFORM_IS_ANDROID
 
-#include "Twitter.h"
+#include <amoamo/Twitter.h>
 
 namespace amoamo {
     
 void Twitter::tweet(const char* tweet) {
-    CCLOG("Android");
+    CCLOG("Androidaaaaabbbb");
 }
-    
+
 }
 
 #endif /* AMOAMO_PLATFORM_IS_ANDROID */
