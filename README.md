@@ -13,11 +13,6 @@ git submodule add git@github.com:masuhajime/amoamo.git
 git submodule update --init
 ````
 
-````
-cd <cocos2d-x project directory>
-ln -s `pwd`/amoamo/amoamo/ Classes/amoamo
-````
-
 ### iOS
 
 1. `TARGETS` -> `<ProjectName> iOS` -> `Build Settings` -> `Search Paths` -> `Header Search Paths`
@@ -26,13 +21,25 @@ ln -s `pwd`/amoamo/amoamo/ Classes/amoamo
 
 ### Android (only google play store)
 
-- add to `proj.android/jni/Android.mk`
+1. add to `proj.android/jni/Android.mk`
 
 ````
+# delete or comment this
+#LOCAL_SRC_FILES := hellocpp/main.cpp \
+#                   ../../Classes/AppDelegate.cpp \
+#                   ../../Classes/HelloWorldScene.cpp
+
 CPP_FILES := $(shell find $(LOCAL_PATH)/../../Classes -name *.cpp)
 CPP_FILES += $(shell find $(LOCAL_PATH)/../../amoamo/amoamo -name *.cpp)
  
 LOCAL_SRC_FILES := hellocpp/main.cpp
 LOCAL_SRC_FILES += $(CPP_FILES:$(LOCAL_PATH)/%=%)
+````
+
+2. on cocos2dx project directory
+
+````
+cd <cocos2d-x project directory>
+ln -s `pwd`/amoamo/amoamo/ Classes/amoamo
 ````
 
