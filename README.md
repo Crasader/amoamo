@@ -1,29 +1,33 @@
 # amoamo
 
 - require
--- cocos2dx 3.2 or above
+ - cocos2d-x 3.2 or above
 
 ## usage
 
+- on cocos2dx project directory
+
 ````
+cd <cocos2d-x project directory>
 git submodule add git@github.com:masuhajime/amoamo.git
 git submodule update --init
 ````
 
-- on cocos2dx project directory
 ````
+cd <cocos2d-x project directory>
 ln -s `pwd`/amoamo/amoamo/ Classes/amoamo
 ````
 
 ### iOS
 
-- TARGETS -> <ProjectName> iOS -> Build Settings -> Search Paths -> Header Search Paths
-- Add `$(SRCROOT)/../Classes` (non-recursive)
-- `Add Files To "<ProjectName>"` select `amoamo/amoamo` directory into `Classes`
+1. `TARGETS` -> `<ProjectName> iOS` -> `Build Settings` -> `Search Paths` -> `Header Search Paths`
+2. Add `$(SRCROOT)/../Classes` (non-recursive)
+3. `Add Files To "<ProjectName>"` select `amoamo/amoamo` directory into `Classes`
 
-### Android(only google play store)
+### Android (only google play store)
 
-- add to jni/Android.mk
+- add to `proj.android/jni/Android.mk`
+
 ````
 CPP_FILES := $(shell find $(LOCAL_PATH)/../../Classes -name *.cpp)
 CPP_FILES += $(shell find $(LOCAL_PATH)/../../amoamo/amoamo -name *.cpp)
