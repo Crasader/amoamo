@@ -1,5 +1,5 @@
-#include <amoamo/definition.h>
-#if 0//AMOAMO_PLATFORM_IS_ANDROID
+#include "amoamo/definition.h"
+#if 0//AMOAMO_PLATFORM_IS_ANDROID ########################################################################################################
 
 #include <jni.h>
 #include "cocos2d.h"
