@@ -1,7 +1,7 @@
 #ifndef AMOAMO_TWITTER_H
 #define AMOAMO_TWITTER_H
 
-#include <amoamo/definition.h>
+#include "amoamo/definition.h"
 
 namespace amoamo
 {

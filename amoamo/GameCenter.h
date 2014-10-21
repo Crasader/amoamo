@@ -1,7 +1,7 @@
 #ifndef AMOAMO_GAMECENTER_H
 #define AMOAMO_GAMECENTER_H
 
-#include <amoamo/definition.h>
+#include "amoamo/definition.h"
 
 namespace amoamo {
     

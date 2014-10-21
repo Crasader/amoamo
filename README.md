@@ -42,5 +42,6 @@ LOCAL_SRC_FILES += $(CPP_FILES:$(LOCAL_PATH)/%=%)
 ````
 cd <cocos2d-x project directory>
 ln -s `pwd`/amoamo/amoamo/ Classes/amoamo
+ln -s `pwd`/amoamo/amoamo/platform/android/_java/amoamo/ proj.android/src/amoamo
 ````
 

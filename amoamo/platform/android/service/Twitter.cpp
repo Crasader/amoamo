@@ -11,7 +11,7 @@ namespace amoamo {
 namespace helper {
 namespace twitter {
 
-    const char* const CLASS_NAME = "com/amoamo/service/Twitter";
+    const char* const CLASS_NAME = "amoamo/service/Twitter";
 
     
 	void callStaticVoidMethodWithString(const char* name, const char* c_string)
