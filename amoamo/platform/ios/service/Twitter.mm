@@ -1,8 +1,8 @@
-#include <definition.h>
-#if AMOAMO_PLATFORM_IS_IOS
+#include "amoamo/definition.h"
+#ifdef AMOAMO_PLATFORM_IS_IOS
 
-#include <definition.h>
-#include <amoamo/Twitter.h>
+#include "cocos2d.h"
+#include "amoamo/Twitter.h"
 
 #import "AppController.h"
 #import <Social/Social.h>

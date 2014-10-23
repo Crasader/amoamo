@@ -1,6 +1,8 @@
 #include "amoamo/definition.h"
-#if 0//AMOAMO_PLATFORM_IS_ANDROID ########################################################################################################
+#ifdef AMOAMO_PLATFORM_IS_ANDROID
+#ifdef AMOAMO_ENABLE_GAME_CENTER
 
+#include "amoamo/GameCenter.h"
 #include <jni.h>
 #include "cocos2d.h"
 #include "platform/android/jni/JniHelper.h"
@@ -115,4 +117,5 @@ namespace amoamo {
     
 } // namespace amoamo
 
+#endif /* AMOAMO_PLATFORM_IS_ANDROID */
 #endif /* AMOAMO_PLATFORM_IS_ANDROID */

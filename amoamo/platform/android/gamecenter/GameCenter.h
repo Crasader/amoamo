@@ -1,6 +1,4 @@
-#ifndef __AndroidGame__GameCenter__
-#define __AndroidGame__GameCenter__
+#ifndef AMOAMO_GAMECENTER
+#define AMOAMO_GAMECENTER
 
-#include <iostream>
-
-#endif /* defined(__AndroidGame__GameCenter__) */
+#endif /* AMOAMO_GAMECENTER */

@@ -1,10 +1,11 @@
+#include "amoamo/definition.h"
+#ifdef AMOAMO_ENABLE_GAME_CENTER
+
 #ifndef AMOAMO_GAMECENTER_H
 #define AMOAMO_GAMECENTER_H
 
-#include "amoamo/definition.h"
-
 namespace amoamo {
-    
+
 class GameCenter
 {
 public:
@@ -28,3 +29,4 @@ public:
 } // namespace amoamo
 
 #endif /* AMOAMO_GAMECENTER_H */
+#endif /* AMOAMO_ENABLE_GAME_CENTER */
