@@ -12,7 +12,7 @@ namespace amoamo {
     namespace helper {
         namespace gamecenter {
             
-            const char* const CLASS_NAME = "com/amoamo/GameCenter";
+            const char* const CLASS_NAME = "amoamo/gamecenter/GameCenter";
             
             void callStaticVoidMethod(const char* name)
             {
@@ -117,5 +117,5 @@ namespace amoamo {
     
 } // namespace amoamo
 
-#endif /* AMOAMO_PLATFORM_IS_ANDROID */
+#endif /* AMOAMO_ENABLE_GAME_CENTER */
 #endif /* AMOAMO_PLATFORM_IS_ANDROID */

@@ -1,5 +1,6 @@
 #include "amoamo/definition.h"
 #ifdef AMOAMO_PLATFORM_IS_ANDROID
+#ifdef AMOAMO_ENABLE_SERVICE_TWITTER
 
 #include "amoamo/Twitter.h"
 #include <jni.h>
@@ -33,4 +34,5 @@ namespace twitter {
 
 }/* amoamo */
 
+#endif /* AMOAMO_ENABLE_SERVICE_TWITTER */
 #endif /* AMOAMO_PLATFORM_IS_ANDROID */
