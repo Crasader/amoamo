@@ -19,7 +19,7 @@ public:
     void postScore(const char* idName, int score);
     void clearAllScores();
     
-#if AMOAMO_PLATFORM_IS_ANDROID
+#ifdef AMOAMO_PLATFORM_IS_ANDROID
     void signIn();
     void signOut();
     bool isSignedIn();
