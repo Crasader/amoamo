@@ -1,25 +1,27 @@
-#ifdef AMOAMO_PLATFORM_IS_IOS
-#ifdef AMOAMO_ENABLE_GAME_CENTER
-
+#import <GameCenterIos.h>
 #import <GameKit/GameKit.h>
+#import "AppController.h"
+#import "RootViewController.h"
+
+@implementation GameCenterIos
 
 /**
  * GameCenterにログインしているか確認処理
  * ログインしていなければログイン画面を表示
  */
-- (void)authenticateLocalPlayer
+-(void)authenticateLocalPlayer
 {
+    AppController *appController = (AppController *)[UIApplication sharedApplication].delegate;
+    
     GKLocalPlayer* player = [GKLocalPlayer localPlayer];
-    player.authenticateHandler = ^(UIViewController* ui, NSError* error )
-    {
-        if( nil != ui )
-        {
-            [self presentViewController:ui animated:YES completion:nil];
+    player.authenticateHandler = ^(UIViewController* ui, NSError* error) {
+        if (error) {
+            NSLog(@"[GameCenter] login failed: %@", error.localizedDescription);
+        } else {
+            [appController.viewController presentViewController:ui animated:YES completion:nil];
         }
-        
     };
 }
-
 
 /**
  * 画面を読み込む際の処理
@@ -34,24 +36,44 @@
  * ランキングボタンタップ時の処理
  * リーダーボードを表示
  */
-- (IBAction)showRanking:(id)sender {
-    GKGameCenterViewController *gcView = [GKGameCenterViewController new];
-    if (gcView != nil)
-    {
-        gcView.gameCenterDelegate = self;
-        gcView.viewState = GKGameCenterViewControllerStateLeaderboards;
-        [self presentViewController:gcView animated:YES completion:nil];
+- (BOOL)showLeaderBoards {
+    if (![GKLocalPlayer localPlayer].isAuthenticated) {
+        return NO;
     }
+    GKGameCenterViewController *gcView = [GKGameCenterViewController new];
+    if (gcView != nil) {
+        return NO;
+    }
+    AppController *appController = (AppController *)[UIApplication sharedApplication].delegate;
+    
+    gcView.gameCenterDelegate = appController.viewController;
+    gcView.viewState = GKGameCenterViewControllerStateLeaderboards;
+    [appController.viewController presentViewController:gcView animated:YES completion:nil];
+    return YES;
+}
+
+// GameCenter 完了 callback
+- (void)gameCenterViewControllerDidFinish:(GKGameCenterViewController *)gameCenterViewController
+{
+    AppController *appController = (AppController *)[UIApplication sharedApplication].delegate;
+    [appController.viewController dismissViewControllerAnimated:YES completion:nil];
 }
 
 /**
- * リーダーボードで完了タップ時の処理
- * 前の画面に戻る
+ * スコアの送信
  */
-- (void)gameCenterViewControllerDidFinish:(GKGameCenterViewController *)gameCenterViewController
+- (void)postScore:(NSString*)idName score:(NSNumber*)score
 {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    if ([GKLocalPlayer localPlayer].isAuthenticated) {
+        GKScore* score = [[GKScore alloc] initWithLeaderboardIdentifier:idName];
+        score.value = score;
+        [GKScore reportScores:@[score] withCompletionHandler:^(NSError *error) {
+            if (error) {
+                // エラーの場合
+            }
+        }];
+    }
 }
 
-#endif /* AMOAMO_ENABLE_GAME_CENTER */
-#endif /* AMOAMO_PLATFORM_IS_IOS */
+@end
+

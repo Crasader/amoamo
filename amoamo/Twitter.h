@@ -10,8 +10,8 @@ namespace amoamo
 class Twitter
 {
 public:
-    static void tweet(const char* $tweet);
-    //static void tweetWithScreenShot(const char* $tweet);
+    static void tweet(const char* tweet);
+    static void tweetWithScreenShot(const char* tweet, const char *file_path);
 };
 
 } // namespace amoamo

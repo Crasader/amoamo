@@ -1,14 +1,13 @@
-#include "amoamo/definition.h"
-#ifdef AMOAMO_PLATFORM_IS_IOS
-#ifdef AMOAMO_ENABLE_GAME_CENTER
-
 #import <GameKit/GameKit.h>
 
 @interface GameCenterIos : UIViewController<GKGameCenterControllerDelegate>
 
-//+ (GameCenterIos*)shared;
+- (void)authenticateLocalPlayer;
+- (void)viewDidLoad;
+
+- (BOOL)showLeaderBoards;
+- (void)gameCenterViewControllerDidFinish:(GKGameCenterViewController *)gameCenterViewController;
+
+- (void)postScore:(NSString*)idName score:(NSNumber*)score;
 
 @end
-
-#endif /* AMOAMO_ENABLE_GAME_CENTER */
-#endif /* AMOAMO_PLATFORM_IS_ANDROID */

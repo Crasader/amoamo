@@ -3,17 +3,50 @@
 #ifdef AMOAMO_ENABLE_GAME_CENTER
 
 #import "amoamo/GameCenter.h"
-#import <GameCenterIos.h>
-#import <GameKit/GameKit.h>
+#include <GameCenterIos.h>
 
 namespace amoamo {
 
     void GameCenter::login()
     {
-        //[GameCenterIos viewDidLoad];
-        // ここは何を書けばいいんでしょうか？
+        CCLOG("GameCenter::login()");
+        [[GameCenterIos new] authenticateLocalPlayer];
     }
-
+    
+#pragma mark -
+#pragma mark Achievements
+    
+    bool GameCenter::showAchievements()
+    {
+        return YES;
+    }
+    
+    void GameCenter::postAchievement(const char* idName, int percentComplete)
+    {
+    }
+    
+    void GameCenter::clearAllAchievements()
+    {
+    }
+    
+#pragma mark -
+#pragma mark Leaderboard
+    
+    bool GameCenter::showScores()
+    {
+        return [[GameCenterIos new] showLeaderBoards];
+    }
+    
+    void GameCenter::postScore(const char* idName, int score)
+    {
+        
+        [[GameCenterIos new] postScore:[NSString stringWithUTF8String:idName] score:[NSNumber numberWithInt:score]];
+    }
+    
+    void GameCenter::clearAllScores()
+    {
+    }
+    
 } /* namespace amoamo */
 
 #endif /* AMOAMO_ENABLE_GAME_CENTER */
