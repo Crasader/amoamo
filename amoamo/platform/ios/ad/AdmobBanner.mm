@@ -2,7 +2,7 @@
 #ifdef AMOAMO_PLATFORM_IS_IOS
 
 #include "cocos2d.h"
-#include "AdmobHelper.h"
+#include "AdmobBanner.h"
 
 #import <UIKit/UIKit.h>
 #import "GADBannerView.h"
@@ -26,7 +26,7 @@ namespace amoamo {
 
 namespace ad {
     
-    void AdmobHelper::init(string adUnitId)
+    void AdmobBanner::init(string adUnitId)
     {
         GADBannerView* bannerView = [GADBannerViewHolder bannerView];
         if (bannerView) {
@@ -55,7 +55,7 @@ namespace ad {
         [GADBannerViewHolder setGADBannerView:bannerView];
     }
     
-    void AdmobHelper::hideAd()
+    void AdmobBanner::hideAd()
     {
         GADBannerView* bannerView = [GADBannerViewHolder bannerView];
         if (!bannerView) {
@@ -66,7 +66,7 @@ namespace ad {
         return;
     }
     
-    void AdmobHelper::showAd()
+    void AdmobBanner::showAd()
     {
         GADBannerView* bannerView = [GADBannerViewHolder bannerView];
         if (!bannerView) {
