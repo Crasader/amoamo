@@ -23,6 +23,7 @@ import com.google.android.gms.ads.AdView;
 public abstract class AdmobBanner extends Cocos2dxActivity {
     
     private static AdView adView = null;
+    private static FrameLayout.LayoutParams adParams = null;
     
     private final static int lp = LinearLayout.LayoutParams.WRAP_CONTENT; 
     
@@ -34,21 +35,31 @@ public abstract class AdmobBanner extends Cocos2dxActivity {
         adView.setAdSize(AdSize.BANNER);
         adView.setAdUnitId(adUnitId);
         
-        FrameLayout.LayoutParams adParams = new FrameLayout.LayoutParams(lp, lp);
+        adParams = new FrameLayout.LayoutParams(lp, lp);
         adParams.gravity = (Gravity.BOTTOM|Gravity.CENTER);
         
-        AdRequest adRequest = new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build();
+        AdRequest adRequest = new AdRequest.Builder()
+            .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+            .build();
         
         adView.loadAd(adRequest);
-        
-        //addContentView(adView, adParams);
     }
     
-    public static void getAdView() {
-    	
+    public static AdView getAdView() {
+    	return adView;
     }
     
-    public static void getAdParams() {
-    	
+    public static FrameLayout.LayoutParams getAdParams() {
+    	return adParams;
+    }
+
+    public static void hide() {
+        if (adView.getVisibility() == AdView.VISIBLE) {
+            adView.setVisibility(View.GONE);
+        }
+    }
+
+    public static void show() {
+        return adView.setVisibility(View.VISIBLE);;
     }
 }
