@@ -72,4 +72,14 @@ public class AdmobBanner {
         adView.destroy();
         adView = null;
     }
+    
+    // for jni
+
+    public static void jni_hide() {
+        AdmobBanner.getInstance.hide();
+    }
+
+    public static void jni_show() {
+        AdmobBanner.getInstance.show();
+    }
 }
