@@ -8,50 +8,37 @@
 
 namespace amoamo {
 
-namespace helper {
 namespace ad {
 namespace admobbanner {
+namespace helper {
 
-    const char* const CLASS_NAME = "amoamo/service/Twitter";
-    
-    void callStaticVoidMethodWithString(const char* name, const char* c_string)
+    const char* const CLASS_NAME = "amoamo/ad/AdmobBanner";
+
+    void callStaticVoidMethod(const char* name)
     {
         cocos2d::JniMethodInfo t;
-        if (cocos2d::JniHelper::getStaticMethodInfo(t, CLASS_NAME, name, "(Ljava/lang/String;)V")) {
-            jstring j_string = t.env->NewStringUTF(c_string);
-            t.env->CallStaticVoidMethod(t.classID, t.methodID, j_string);
+        if (cocos2d::JniHelper::getStaticMethodInfo(t, CLASS_NAME, name, "()V")) {
+            t.env->CallStaticVoidMethod(t.classID, t.methodID);
             t.env->DeleteLocalRef(t.classID);
-            t.env->DeleteLocalRef(j_string);
-        }
-    }
-    
-    
-    void callStaticVoidMethodWithStringAndString(const char* name, const char* c_string, const char* c_string2)
-    {
-        cocos2d::JniMethodInfo t;
-        if (cocos2d::JniHelper::getStaticMethodInfo(t, CLASS_NAME, name, "(Ljava/lang/String;Ljava/lang/String;)V")) {
-            jstring j_string = t.env->NewStringUTF(c_string);
-            jstring j_string2 = t.env->NewStringUTF(c_string2);
-            t.env->CallStaticVoidMethod(t.classID, t.methodID, j_string, j_string2);
-            t.env->DeleteLocalRef(t.classID);
-            t.env->DeleteLocalRef(j_string);
-            t.env->DeleteLocalRef(j_string2);
         }
     }
     
 } /* helper */
-} /* ad */
-} /* admob */
     
-    void Twitter::tweet(const char* tweet) {
-        amoamo::helper::ad::admob::();
+    void AdmobBanner::init(string adUnitId) {
+        // do nothing on android
     }
-    
-    /*
-    void Twitter::tweetWithScreenShot(const char* tweet, const char *file_path) {
-        amoamo::helper::twitter::callStaticVoidMethodWithStringAndString("tweetWithScreenShot", tweet, file_path);
-    }*/
 
+    void AdmobBanner::hideAd() {
+        amoamo::ad::admobbanner::helper::callStaticVoidMethod("jni_hide");
+    }
+
+    void AdmobBanner::showAd() {
+        amoamo::ad::admobbanner::helper::callStaticVoidMethod("jni_show");
+    }
+
+} /* admobbanner */
 }/* amoamo */
+}/* ad */
 
 #endif /* AMOAMO_PLATFORM_IS_ANDROID */
