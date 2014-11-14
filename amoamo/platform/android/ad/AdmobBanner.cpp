@@ -7,8 +7,8 @@
 #include "platform/android/jni/JniHelper.h"
 
 namespace amoamo {
-
 namespace ad {
+
 namespace admobbanner {
 namespace helper {
 
@@ -38,7 +38,7 @@ namespace helper {
         amoamo::ad::admobbanner::helper::callStaticVoidMethod("jni_show");
     }
 
-}/* amoamo */
 }/* ad */
+}/* amoamo */
 
 #endif /* AMOAMO_PLATFORM_IS_ANDROID */
