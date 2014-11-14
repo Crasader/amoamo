@@ -24,6 +24,7 @@ namespace helper {
     }
     
 } /* helper */
+} /* admobbanner */
     
     void AdmobBanner::init(string adUnitId) {
         // do nothing on android
@@ -37,7 +38,6 @@ namespace helper {
         amoamo::ad::admobbanner::helper::callStaticVoidMethod("jni_show");
     }
 
-} /* admobbanner */
 }/* amoamo */
 }/* ad */
 
