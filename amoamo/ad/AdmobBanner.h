@@ -1,12 +1,10 @@
 #include "amoamo/definition.h"
 //#ifdef AMOAMO_ENABLE_SERVICE_TWITTER
 
-#ifndef AMOAMO_ADMOB_HELPER_H
-#define AMOAMO_ADMOB_HELPER_H
+#ifndef AMOAMO_ADMOB_BANNER_H
+#define AMOAMO_ADMOB_BANNER_H
 
 #include "amoamo/templates/Singleton.h"
-
-using namespace std;
 
 namespace amoamo{
 namespace ad{
@@ -17,7 +15,7 @@ private:
     friend class Singleton<AdmobBanner>;
     AdmobBanner(){}
 public:
-    void init(string adUnitId);
+    void init(std::string adUnitId);
     void hideAd();
     void showAd();
     
@@ -27,4 +25,4 @@ public:
 } // namespace ad
 } // namespace amoamo
 
-#endif // AMOAMO_ADMOB_HELPER_H
+#endif // AMOAMO_ADMOB_BANNER_H

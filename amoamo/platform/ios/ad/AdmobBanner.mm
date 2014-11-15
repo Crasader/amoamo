@@ -28,6 +28,13 @@ namespace ad {
     
     void AdmobBanner::init(string adUnitId)
     {
+        /*
+         kGADAdSizeBanner: 320x50
+         kGADAdSizeMediumRectangle: 300x250
+         kGADAdSizeFullBanner: 468x60
+         kGADAdSizeLeaderboard: x
+         kGADAdSizeSkyscraper: x
+         */
         GADBannerView* bannerView = [GADBannerViewHolder bannerView];
         if (bannerView) {
             return;
@@ -39,10 +46,10 @@ namespace ad {
         GADAdSize adSize;
         if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone){
             adSize = kGADAdSizeBanner;
-            adPos = CGPointMake(0.0, controller.view.frame.size.height - 50);
+            adPos = CGPointMake(0, controller.view.frame.size.height - adSize.size.height);
         } else {
             adSize = kGADAdSizeLeaderboard;
-            adPos = CGPointMake(0.0, controller.view.frame.size.height - 90);
+            adPos = CGPointMake(0.0, controller.view.frame.size.height - adSize.size.height);
         }
         bannerView = [[[GADBannerView alloc] initWithAdSize:adSize origin:adPos] autorelease];
         bannerView.adUnitID = [NSString stringWithUTF8String:adUnitId.c_str()];
