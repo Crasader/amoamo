@@ -6,20 +6,39 @@
 
 #import <UIKit/UIKit.h>
 #import "GADInterstitial.h"
+#import "GADInterstitialDelegate.h"
 #import "AppController.h"
 
 using namespace std;
 
-@interface GADInterstitialViewHolder : NSObject {
-}
-+(GADInterstitial*)bannerView;
-+(void)setGADInterstitialView:(GADInterstitial*)bannerview;
+@interface GADInterstitialViewHolder : NSObject<GADInterstitialDelegate>
++(GADInterstitialViewHolder*)instance;
+@property(nonatomic, strong) GADInterstitial *interstitial;
+@property(nonatomic, retain) NSString* adUnitId;
 @end
 
 @implementation GADInterstitialViewHolder
-static GADInterstitial* bannerView = nil;
-+ (GADInterstitial*)bannerView { return bannerView; }
-+ (void)setGADInterstitialView:(GADInterstitial*)value { bannerView = value; }
+static GADInterstitialViewHolder* instance = [[GADInterstitialViewHolder alloc] init];
++ (GADInterstitialViewHolder*)instance { return instance; }
+- (void)initialize:(NSString*)adUnitId {
+    self.adUnitId = adUnitId;
+    [self createAndLoadInterstitial];
+}
+- (void)interstitialDidDismissScreen:(GADInterstitial *)interstitial {
+    self.interstitial = [self createAndLoadInterstitial];
+}
+- (GADInterstitial *)getInterstitial {
+    return self.interstitial;
+}
+- (GADInterstitial *)createAndLoadInterstitial {
+    self.interstitial = [[GADInterstitial alloc] init];
+    self.interstitial.adUnitID = self.adUnitId;
+    self.interstitial.delegate = self;
+    GADRequest *request = [GADRequest request];
+    request.testDevices = @[ GAD_SIMULATOR_ID ];
+    [self.interstitial loadRequest:request];
+    return self.interstitial;
+}
 @end
 
 namespace amoamo {
@@ -28,40 +47,25 @@ namespace ad {
     
     void AdmobInterstitial::init(string adUnitId)
     {
-        this->adUnitId = adUnitId;
-        load();
-    }
-    
-    void AdmobInterstitial::load()
-    {
-        bannerView = [[GADInterstitial alloc] init];
-        bannerView.adUnitID = [NSString stringWithUTF8String:adUnitId.c_str()];
-        GADRequest *request = [GADRequest request];
-        request.testDevices = @[ GAD_SIMULATOR_ID ];
-        [bannerView loadRequest:request];
-        
-        [GADInterstitialViewHolder setGADInterstitialView:bannerView];
+        GADInterstitialViewHolder* holder = [GADInterstitialViewHolder instance];
+        [holder initialize:[NSString stringWithUTF8String:adUnitId.c_str()]];
     }
     
     void AdmobInterstitial::showAd()
     {
-        GADInterstitial* bannerView = [GADInterstitialViewHolder bannerView];
-        if (!bannerView) {
-            return;
-        }
-        if ([bannerView isReady]) {
+        GADInterstitialViewHolder* holder = [GADInterstitialViewHolder instance];
+        GADInterstitial* interstitial = [holder getInterstitial];
+        if ([interstitial isReady]) {
             AppController *appController = (AppController *)[UIApplication sharedApplication].delegate;
-            [bannerView presentFromRootViewController:(UIViewController *)appController.viewController];
+            [interstitial presentFromRootViewController:(UIViewController *)appController.viewController];
         }
     }
     
     bool AdmobInterstitial::isReady()
     {
-        GADInterstitial* bannerView = [GADInterstitialViewHolder bannerView];
-        if (!bannerView) {
-            return false;
-        }
-        return [bannerView isReady];
+        GADInterstitialViewHolder* holder = [GADInterstitialViewHolder instance];
+        GADInterstitial* interstitial = [holder getInterstitial];
+        return [interstitial isReady];
     }
     
 } /* namespace ad */
