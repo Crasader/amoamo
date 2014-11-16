@@ -9,6 +9,8 @@
 #import "GADInterstitialDelegate.h"
 #import "AppController.h"
 
+// https://developers.google.com/mobile-ads-sdk/docs/admob/ios/interstitial
+
 using namespace std;
 
 @interface GADInterstitialViewHolder : NSObject<GADInterstitialDelegate>

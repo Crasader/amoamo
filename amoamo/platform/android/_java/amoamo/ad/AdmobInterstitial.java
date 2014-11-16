@@ -11,7 +11,7 @@ import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 
-public class AdmobBanner {
+public class AdmobInterstitial {
     
 	private static final AdmobBanner instance = new AdmobBanner();
 	
@@ -75,10 +75,10 @@ public class AdmobBanner {
     // for jni
 
     public static void jni_hide() {
-        AdmobBanner.getInstance().hide();
+        AdmobBanner.getInstance.hide();
     }
 
     public static void jni_show() {
-        AdmobBanner.getInstance().show();
+        AdmobBanner.getInstance.show();
     }
 }
