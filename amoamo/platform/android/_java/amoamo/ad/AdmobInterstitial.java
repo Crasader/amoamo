@@ -13,23 +13,31 @@ import com.google.android.gms.ads.AdView;
 
 public class AdmobInterstitial {
     
-	private static final AdmobBanner instance = new AdmobBanner();
+	private static final AdmobInterstitial instance = new AdmobInterstitial();
 	
     private static AdView adView = null;
     private static FrameLayout.LayoutParams adParams = null;
     
+    private static AppActivity appActivity = null;
+    private static String adUnitId = null;
+    
     private final static int lp = LinearLayout.LayoutParams.WRAP_CONTENT; 
     
-    private AdmobBanner(){}
+    private AdmobInterstitial(){}
     
-    public static AdmobBanner getInstance(){
-    	return AdmobBanner.instance;
+    public static AdmobInterstitial getInstance(){
+    	return AdmobInterstitial.instance;
     }
     
-    public void init(AppActivity appActivity, String adUnitId) {
+    public void setAppActivity(AppActivity appActivity) {
+        this.appActivity = appActivity;
+    }
+    
+    public void init(String adUnitId) {
     	if (adView != null) {
     		return;
     	}
+        this.adUnitId = adUnitId;
         adView = new AdView(appActivity);
         adView.setAdSize(AdSize.BANNER);
         adView.setBackgroundColor(Color.TRANSPARENT);
@@ -61,7 +69,7 @@ public class AdmobInterstitial {
     }
 
     public void show() {
-        adView.setVisibility(View.VISIBLE);;
+        adView.setVisibility(View.VISIBLE);
     }
     
     public void destroy() {
@@ -73,12 +81,16 @@ public class AdmobInterstitial {
     }
     
     // for jni
-
-    public static void jni_hide() {
-        AdmobBanner.getInstance.hide();
+    
+    public static void jniInit(String adUnitId) {
+        //AdmobInterstitial.getInstance().init(adUnitId);
     }
 
-    public static void jni_show() {
-        AdmobBanner.getInstance.show();
+    public static void jniIsReady() {
+    	//AdmobInterstitial.getInstance().hide();
+    }
+
+    public static void jniShow() {
+    	//AdmobInterstitial.getInstance().show();
     }
 }

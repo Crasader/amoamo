@@ -1,7 +1,7 @@
 #include "amoamo/definition.h"
 #ifdef AMOAMO_PLATFORM_IS_ANDROID
 
-#include "amoamo/ad/AdmobInterstitial"
+#include "amoamo/ad/AdmobInterstitial.h"
 #include <jni.h>
 #include "cocos2d.h"
 #include "platform/android/jni/JniHelper.h"
@@ -13,6 +13,17 @@ namespace admobinterstitial {
 namespace helper {
 
     const char* const CLASS_NAME = "amoamo/ad/AdmobInterstitial";
+    
+    void callStaticVoidMethodWithString(const char* name, const char* c_string)
+    {
+        cocos2d::JniMethodInfo t;
+        if (cocos2d::JniHelper::getStaticMethodInfo(t, CLASS_NAME, name, "(Ljava/lang/String;)V")) {
+            jstring j_string = t.env->NewStringUTF(c_string);
+            t.env->CallStaticVoidMethod(t.classID, t.methodID, j_string);
+            t.env->DeleteLocalRef(t.classID);
+            t.env->DeleteLocalRef(j_string);
+        }
+    }
 
     void callStaticVoidMethod(const char* name)
     {
@@ -26,16 +37,17 @@ namespace helper {
 } /* helper */
 } /* admobinterstitial */
     
-    void AdmobInterstitial::init(string adUnitId) {
-        // do nothing on android
+    void AdmobInterstitial::init(const std::string adUnitId) {
+        amoamo::ad::admobinterstitial::helper::callStaticVoidMethodWithString("jniInit", adUnitId.c_str());
     }
 
     void AdmobInterstitial::showAd() {
-        //amoamo::ad::admobinterstitial::helper::callStaticVoidMethod("jni_show");
+        //amoamo::ad::admobinterstitial::helper::callStaticVoidMethod("jniShow");
     }
-    
-    void AdmobInterstitial::isReady() {
-        //amoamo::ad::admobinterstitial::helper::callStaticVoidMethod("jni_hide");
+
+    bool AdmobInterstitial::isReady() {
+        //amoamo::ad::admobinterstitial::helper::callStaticVoidMethod("jniHide");
+        return false;
     }
 
 }/* ad */

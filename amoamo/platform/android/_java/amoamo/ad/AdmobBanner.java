@@ -3,7 +3,6 @@ package amoamo.ad;
 import org.cocos2dx.cpp.AppActivity;
 import android.graphics.Color;
 import android.view.Gravity;
-import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
@@ -15,8 +14,11 @@ public class AdmobBanner {
     
 	private static final AdmobBanner instance = new AdmobBanner();
 	
-    private static AdView adView = null;
-    private static FrameLayout.LayoutParams adParams = null;
+    private AdView adView = null;
+    private FrameLayout.LayoutParams adParams = null;
+    
+    private AppActivity appActivity = null;
+    private String adUnitId = null;
     
     private final static int lp = LinearLayout.LayoutParams.WRAP_CONTENT; 
     
@@ -26,24 +28,35 @@ public class AdmobBanner {
     	return AdmobBanner.instance;
     }
     
-    public void init(AppActivity appActivity, String adUnitId) {
-    	if (adView != null) {
-    		return;
-    	}
-        adView = new AdView(appActivity);
-        adView.setAdSize(AdSize.BANNER);
-        adView.setBackgroundColor(Color.TRANSPARENT);
-        adView.setAdUnitId(adUnitId);
-        
-        adParams = new FrameLayout.LayoutParams(lp, lp);
-        adParams.gravity = (Gravity.BOTTOM|Gravity.CENTER);
+    public void load() {
+    	appActivity.runOnUiThread(new Runnable() {
+    		public void run() {
+    	        adView.setAdSize(AdSize.BANNER);
+    	        adView.setBackgroundColor(Color.TRANSPARENT);
+    	        adParams.gravity = (Gravity.BOTTOM|Gravity.CENTER);
+    	        adView.setAdUnitId(adUnitId);
+    	        AdRequest adRequest = new AdRequest.Builder()
+    		        .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+    		        .build();
+    	        adView.loadAd(adRequest);
+    		}
+    	});
     }
     
-    public void load() {
-        AdRequest adRequest = new AdRequest.Builder()
-            .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
-            .build();
-        adView.loadAd(adRequest);
+    public AdmobBanner init() {
+        adView = new AdView(appActivity);
+        adParams = new FrameLayout.LayoutParams(lp, lp);
+        return this;
+    }
+    
+    public AdmobBanner setAppActivity(AppActivity appActivity) {
+    	this.appActivity = appActivity;
+    	return this;
+    }
+    
+    public AdmobBanner setAdUnitId(String adUnitId) {
+    	this.adUnitId = adUnitId;
+    	return this;
     }
     
     public AdView getAdView() {
@@ -56,12 +69,24 @@ public class AdmobBanner {
 
     public void hide() {
         if (adView.getVisibility() == AdView.VISIBLE) {
-            adView.setVisibility(View.GONE);
+        	appActivity.runOnUiThread(new Runnable() {
+        		public void run() {
+		            adView.setVisibility(AdView.GONE);
+		            adView.pause();
+        		}
+        	});
         }
     }
 
     public void show() {
-        adView.setVisibility(View.VISIBLE);;
+        //if (adView.getVisibility() == AdView.GONE) {
+	    	appActivity.runOnUiThread(new Runnable() {
+	    		public void run() {
+			        adView.setVisibility(AdView.VISIBLE);
+			        adView.resume();
+	    		}
+	    	});
+        //}
     }
     
     public void destroy() {
@@ -74,11 +99,15 @@ public class AdmobBanner {
     
     // for jni
 
-    public static void jni_hide() {
+    public static void jniInit(String adUnitId) {
+        AdmobBanner.getInstance().setAdUnitId(adUnitId).load();
+    }
+    
+    public static void jniHide() {
         AdmobBanner.getInstance().hide();
     }
 
-    public static void jni_show() {
+    public static void jniShow() {
         AdmobBanner.getInstance().show();
     }
 }
