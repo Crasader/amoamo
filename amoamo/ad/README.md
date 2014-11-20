@@ -31,7 +31,7 @@ amoamo::ad::AdmobBanner::getInstance()->showAd();
 - on `.cpp` code
 ```c
 amoamo::ad::AdmobInterstitial::getInstance()->
-    init("ca-app-pub-8451216461217892/9929816802");
+    init("ca-app-pub-****/****");
 if (amoamo::ad::AdmobInterstitial::getInstance()->isReady()) {
     amoamo::ad::AdmobInterstitial::getInstance()->showAd();
 }
