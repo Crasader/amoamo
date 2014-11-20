@@ -34,6 +34,18 @@ namespace helper {
         }
     }
     
+    bool callStaticBoolMethod(const char* name)
+    {
+        cocos2d::JniMethodInfo t;
+        if (cocos2d::JniHelper::getStaticMethodInfo(t, CLASS_NAME, name, "()Z")) {
+            bool result = (t.env->CallStaticBooleanMethod(t.classID, t.methodID) == JNI_TRUE);
+            t.env->DeleteLocalRef(t.classID);
+            return result;
+        } else {
+            return false;
+        }
+    }
+    
 } /* helper */
 } /* admobinterstitial */
     
@@ -42,12 +54,11 @@ namespace helper {
     }
 
     void AdmobInterstitial::showAd() {
-        //amoamo::ad::admobinterstitial::helper::callStaticVoidMethod("jniShow");
+        amoamo::ad::admobinterstitial::helper::callStaticVoidMethod("jniShow");
     }
 
     bool AdmobInterstitial::isReady() {
-        //amoamo::ad::admobinterstitial::helper::callStaticVoidMethod("jniHide");
-        return false;
+        return amoamo::ad::admobinterstitial::helper::callStaticBoolMethod("jniIsReady");
     }
 
 }/* ad */

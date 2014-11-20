@@ -1,27 +1,21 @@
 package amoamo.ad;
 
 import org.cocos2dx.cpp.AppActivity;
-import android.graphics.Color;
-import android.view.Gravity;
-import android.view.View;
-import android.widget.FrameLayout;
-import android.widget.LinearLayout;
 
-import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
 
 public class AdmobInterstitial {
     
 	private static final AdmobInterstitial instance = new AdmobInterstitial();
 	
-    private static AdView adView = null;
-    private static FrameLayout.LayoutParams adParams = null;
+    private static InterstitialAd interstitial = null;
     
-    private static AppActivity appActivity = null;
-    private static String adUnitId = null;
+    private AppActivity appActivity = null;
+    private String adUnitId = null;
     
-    private final static int lp = LinearLayout.LayoutParams.WRAP_CONTENT; 
+    private boolean isReady = false;
     
     private AdmobInterstitial(){}
     
@@ -29,68 +23,86 @@ public class AdmobInterstitial {
     	return AdmobInterstitial.instance;
     }
     
-    public void setAppActivity(AppActivity appActivity) {
-        this.appActivity = appActivity;
+    public AdmobInterstitial setAppActivity(AppActivity appActivity) {
+    	this.appActivity = appActivity;
+    	return this;
     }
     
-    public void init(String adUnitId) {
-    	if (adView != null) {
-    		return;
-    	}
-        this.adUnitId = adUnitId;
-        adView = new AdView(appActivity);
-        adView.setAdSize(AdSize.BANNER);
-        adView.setBackgroundColor(Color.TRANSPARENT);
-        adView.setAdUnitId(adUnitId);
-        
-        adParams = new FrameLayout.LayoutParams(lp, lp);
-        adParams.gravity = (Gravity.BOTTOM|Gravity.CENTER);
+    public AdmobInterstitial setAdUnitId(String adUnitId) {
+    	this.adUnitId = adUnitId;
+    	return this;
+    }
+    
+    public AdmobInterstitial init() {
+    	isReady = false;
+    	return this;
     }
     
     public void load() {
-        AdRequest adRequest = new AdRequest.Builder()
-            .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
-            .build();
-        adView.loadAd(adRequest);
-    }
-    
-    public AdView getAdView() {
-    	return adView;
-    }
-    
-    public FrameLayout.LayoutParams getAdParams() {
-    	return adParams;
-    }
-
-    public void hide() {
-        if (adView.getVisibility() == AdView.VISIBLE) {
-            adView.setVisibility(View.GONE);
-        }
+    	this.appActivity.runOnUiThread(new Runnable() {
+    		public void run() {
+    	    	isReady = false;
+    		    interstitial = new InterstitialAd(appActivity);
+    		    interstitial.setAdUnitId(adUnitId);
+    		    AdRequest adRequest = new AdRequest.Builder().build();
+    		    interstitial.setAdListener(new AdListener() {
+				  @Override
+				  public void onAdClosed() {
+					load();
+				  }
+    		    });
+    		    interstitial.loadAd(adRequest);
+    		}
+    	});
     }
 
     public void show() {
-        adView.setVisibility(View.VISIBLE);
+    	if (interstitial == null) {
+    		return;
+    	}
+    	this.appActivity.runOnUiThread(new Runnable() {
+    		public void run() {
+		        if (interstitial.isLoaded()) {
+		            interstitial.show();
+		        }
+    		}
+    	});
+    }
+    
+    private void checkReady() {
+    	if (interstitial == null) {
+    		return;
+    	}
+    	this.appActivity.runOnUiThread(new Runnable() {
+    		public void run() {
+    			isReady = interstitial.isLoaded();
+    		}
+    	});
+    }
+
+    public boolean isReady() {
+    	checkReady();
+    	return isReady;
     }
     
     public void destroy() {
-        if(adView == null){
+        if (interstitial == null) {
         	return;
         }
-        adView.destroy();
-        adView = null;
+        interstitial = null;
     }
     
     // for jni
     
     public static void jniInit(String adUnitId) {
-        //AdmobInterstitial.getInstance().init(adUnitId);
+        AdmobInterstitial.getInstance().setAdUnitId(adUnitId).load();
     }
 
-    public static void jniIsReady() {
-    	//AdmobInterstitial.getInstance().hide();
+    public static boolean jniIsReady() {
+    	return AdmobInterstitial.getInstance().isReady();
     }
 
     public static void jniShow() {
-    	//AdmobInterstitial.getInstance().show();
+    	AdmobInterstitial.getInstance().show();
     }
 }
