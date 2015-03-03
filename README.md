@@ -22,7 +22,9 @@ $ git submodule update --init
  -> `Search Paths`  
  -> `Header Search Paths`
 2. Add `$(SRCROOT)/../Classes` (non-recursive)
-3. `Add Files To "<ProjectName>"` select `amoamo/amoamo` directory into `Classes`
+3. add `amoamo/ad/{AdMob,LibAdapterIAd,NendAd}`
+4. `Add Files To "<ProjectName>"` select `amoamo/amoamo` directory into `Classes`
+5. `amoamo/platform/android` -> `Delete` -> `Remove reference`
 
 ### Android (only google play store)
 
