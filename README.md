@@ -8,9 +8,10 @@
 - on cocos2dx project directory
 
 ````
-cd <cocos2d-x project directory>
-git submodule add git@github.com:masuhajime/amoamo.git
-git submodule update --init
+$ cd <cocos2d-x project directory>
+$ git submodule add git@github.com:masuhajime/amoamo.git
+$ cd amoamo
+$ git submodule update --init
 ````
 
 ### iOS
