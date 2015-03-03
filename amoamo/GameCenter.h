@@ -11,13 +11,8 @@ class GameCenter
 public:
     static void login();
     
-    static bool showAchievements();
-    static void postAchievement(const char* idName, int percentComplete);
-    static void clearAllAchievements();
-    
     static bool showScores();
     static void postScore(const char* idName, int score);
-    static void clearAllScores();
     
 #ifdef AMOAMO_PLATFORM_IS_ANDROID
     void signIn();

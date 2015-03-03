@@ -14,22 +14,6 @@ namespace amoamo {
     }
     
 #pragma mark -
-#pragma mark Achievements
-    
-    bool GameCenter::showAchievements()
-    {
-        return YES;
-    }
-    
-    void GameCenter::postAchievement(const char* idName, int percentComplete)
-    {
-    }
-    
-    void GameCenter::clearAllAchievements()
-    {
-    }
-    
-#pragma mark -
 #pragma mark Leaderboard
     
     bool GameCenter::showScores()
@@ -41,10 +25,6 @@ namespace amoamo {
     {
         
         [[GameCenterIos new] postScore:[NSString stringWithUTF8String:idName] score:[NSNumber numberWithInt:score]];
-    }
-    
-    void GameCenter::clearAllScores()
-    {
     }
     
 } /* namespace amoamo */
