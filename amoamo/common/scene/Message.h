@@ -1,5 +1,5 @@
-#ifndef __TestProject34__Message__
-#define __TestProject34__Message__
+#ifndef AMOAMO_COMMON_SCENE_MESSAGE_H
+#define AMOAMO_COMMON_SCENE_MESSAGE_H
 
 #include <iostream>
 #include "cocos2d.h"
@@ -19,4 +19,4 @@ namespace scene {
 }// namespace common
 }// namespace amoamo
 
-#endif /* defined(__TestProject34__Message__) */
+#endif /* defined(AMOAMO_COMMON_SCENE_MESSAGE_H) */

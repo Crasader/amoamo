@@ -1,5 +1,5 @@
-#ifndef __TestProject34__Dialog__
-#define __TestProject34__Dialog__
+#ifndef AMOAMO_COMMON_NODE_DIALOG_H
+#define AMOAMO_COMMON_NODE_DIALOG_H
 
 #include <iostream>
 #include "cocos2d.h"
@@ -22,4 +22,4 @@ public:
 }// namespace common
 }// namespace amoamo
 
-#endif /* defined(__TestProject34__Dialog__) */
+#endif /* defined(AMOAMO_COMMON_NODE_DIALOG_H) */

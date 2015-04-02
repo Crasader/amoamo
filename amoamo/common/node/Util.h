@@ -1,5 +1,5 @@
-#ifndef __TestProject34__util__
-#define __TestProject34__util__
+#ifndef AMOAMO_COMMON_NODE_UTIL_H
+#define AMOAMO_COMMON_NODE_UTIL_H
 
 #include <iostream>
 
@@ -33,4 +33,4 @@ public:
 }// namespace common
 }// namespace amoamo
 
-#endif /* defined(__TestProject34__util__) */
+#endif /* defined(AMOAMO_COMMON_NODE_UTIL_H) */

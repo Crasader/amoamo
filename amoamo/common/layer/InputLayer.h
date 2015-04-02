@@ -1,5 +1,5 @@
-#ifndef __AndroidGame__InputLayer__
-#define __AndroidGame__InputLayer__
+#ifndef AMOAMO_COMMON_LAYER_INPUTLAYER_H
+#define AMOAMO_COMMON_LAYER_INPUTLAYER_H
 
 #include <iostream>
 
@@ -34,4 +34,4 @@ namespace layer {
 }// namespace common
 }// namespace amoamo
 
-#endif /* defined(__AndroidGame__InputLayer__) */
+#endif /* defined(AMOAMO_COMMON_LAYER_INPUTLAYER_H) */

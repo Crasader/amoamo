@@ -1,5 +1,5 @@
-#ifndef __TestProject34__Overlay__
-#define __TestProject34__Overlay__
+#ifndef AMOAMO_COMMON_LAYER_OVERLAY_H
+#define AMOAMO_COMMON_LAYER_OVERLAY_H
 
 #include <iostream>
 
@@ -29,4 +29,4 @@ private:
 }// namespace common
 }// namespace amoamo
 
-#endif /* defined(__TestProject34__OverlayDialog__) */
+#endif /* defined(AMOAMO_COMMON_LAYER_OVERLAY_H) */

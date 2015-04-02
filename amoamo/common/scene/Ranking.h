@@ -1,5 +1,5 @@
-#ifndef __TestProject34__Ranking__
-#define __TestProject34__Ranking__
+#ifndef AMOAMO_COMMON_SCENE_RANKING_H
+#define AMOAMO_COMMON_SCENE_RANKING_H
 
 #include <iostream>
 #include "cocos2d.h"
@@ -22,4 +22,4 @@ namespace scene {
 }// namespace common
 }// namespace amoamo
 
-#endif /* defined(__TestProject34__Ranking__) */
+#endif /* defined(AMOAMO_COMMON_SCENE_RANKING_H) */
