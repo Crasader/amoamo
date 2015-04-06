@@ -21,7 +21,7 @@ public:
      * 例えばローディング画面をつくる時に使用される
      */
     static Layer* createOnNodeMiddle(Node* node);
-private:
+    
     static LayerColor* createUntouchableOverlayLayer(int alpha = 128);
 };
 

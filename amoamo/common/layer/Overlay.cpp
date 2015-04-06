@@ -30,20 +30,6 @@ namespace layer {
     Layer* Overlay::createOnNodeMiddle(Node* node) {
         auto baseLayer = createUntouchableOverlayLayer();
         
-        /*
-         
-         auto sprite = Sprite::create("res/loading.png");
-         sprite->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
-         sprite->setPosition(Vec2(this->getBoundingBox().getMidX(), this->getBoundingBox().getMidY()));
-         sprite->setScale(4.0f);
-         sprite->getTexture()->setAliasTexParameters();
-         
-         ActionInterval* r = RotateBy::create(2, 360);
-         RepeatForever* rf = RepeatForever::create(r);
-         sprite->runAction(rf);
-         this->addChild(sprite);
-         */
-        
         node->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
         node->setPosition(Vec2(
                                baseLayer->getBoundingBox().getMidX(),
