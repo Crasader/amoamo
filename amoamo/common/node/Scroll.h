@@ -14,7 +14,7 @@ namespace node {
 class Scroll
 {
 public:
-    static Node* createNode(/* :TODO */);
+    static Node* createNode(Size size);
 };
     
 }// namespace node

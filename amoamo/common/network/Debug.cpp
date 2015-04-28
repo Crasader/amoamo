@@ -8,10 +8,15 @@ namespace amoamo {
 namespace common {
 namespace network {
     
-    
     const int Debug::RESPONSE_STATUS_SUCCEED = 0;
     const int Debug::RESPONSE_STATUS_TIMEOUT = 1;
     const int Debug::RESPONSE_STATUS_FAILED  = 2;
+    
+    
+    void Debug::delay(const std::function<void()> &succeed, int seconds)
+    {
+        delay(succeed, [](){}, [](){}, RESPONSE_STATUS_SUCCEED, seconds);
+    }
     
     void Debug::delay(
                       const std::function<void()> &succeed,

@@ -19,6 +19,12 @@ public:
      * 指定秒数後にレスポンスを返す
      * http://httpbin.org/delay/3
      */
+    static void delay(const std::function<void()> &succeed, int seconds = 5);
+    
+    /**
+     * 指定秒数後にレスポンスを返す
+     * http://httpbin.org/delay/3
+     */
     static void delay(const cocos2d::network::ccHttpRequestCallback &callback, int seconds = 5);
     
     /**

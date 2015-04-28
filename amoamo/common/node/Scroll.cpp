@@ -1,5 +1,7 @@
 #include "amoamo/common/node/Scroll.h"
+#include "extensions/cocos-ext.h"
 
+USING_NS_CC_EXT;
 USING_NS_CC;
 using namespace ui;
 
@@ -8,10 +10,13 @@ namespace common {
 namespace node {
     
     
-    Node* Scroll::createNode(/* :TODO */) {
+    Node* Scroll::createNode(Size size) {
         auto node = Node::create();
         
-        
+        Texture2D *bgTexture = Director::getInstance()->getTextureCache()->addImage("bg01.jpg");
+        const Texture2D::TexParams tp = {GL_LINEAR, GL_LINEAR, GL_REPEAT, GL_REPEAT};
+        //auto *pSprite = Sprite::createWithTexture(bgTexture, Rect(0, 0, scroll_width, scroll_height*2));
+        //pSprite->getTexture()->setTexParameters(tp);
         
         return node;
     }
