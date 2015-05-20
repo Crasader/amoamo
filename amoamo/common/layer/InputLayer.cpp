@@ -1,4 +1,3 @@
-#include "zipper/ParseClass.h"
 #include "cocostudio/CocoStudio.h"
 #include "cocosGUI.h"
 #include "amoamo/common/node/Util.h"

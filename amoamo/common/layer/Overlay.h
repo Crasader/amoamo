@@ -1,5 +1,4 @@
-#ifndef AMOAMO_COMMON_LAYER_OVERLAY_H
-#define AMOAMO_COMMON_LAYER_OVERLAY_H
+#pragma once
 
 #include <iostream>
 
@@ -28,5 +27,3 @@ public:
 }// namespace layer
 }// namespace common
 }// namespace amoamo
-
-#endif /* defined(AMOAMO_COMMON_LAYER_OVERLAY_H) */

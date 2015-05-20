@@ -1,5 +1,4 @@
-#ifndef AMOAMO_COMMON_NODE_DIALOG_H
-#define AMOAMO_COMMON_NODE_DIALOG_H
+#pragma once
 
 #include <iostream>
 #include "cocos2d.h"
@@ -10,7 +9,7 @@ using namespace ui;
 namespace amoamo {
 namespace common {
 namespace node {
-        
+
 class Dialog
 {
 public:
@@ -21,5 +20,3 @@ public:
 }// namespace node
 }// namespace common
 }// namespace amoamo
-
-#endif /* defined(AMOAMO_COMMON_NODE_DIALOG_H) */

@@ -1,5 +1,4 @@
-#ifndef AMOAMO_COMMON_SCENE_RANKING_H
-#define AMOAMO_COMMON_SCENE_RANKING_H
+#pragma once
 
 #include <iostream>
 #include "cocos2d.h"
@@ -21,5 +20,3 @@ namespace scene {
 }// namespace scene
 }// namespace common
 }// namespace amoamo
-
-#endif /* defined(AMOAMO_COMMON_SCENE_RANKING_H) */

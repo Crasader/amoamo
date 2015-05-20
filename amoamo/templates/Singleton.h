@@ -1,5 +1,4 @@
-#ifndef _AMOAMO_SINGLETON_H
-#define _AMOAMO_SINGLETON_H
+#pragma once
 
 // https://gist.github.com/DanDanBaker/2299755
 
@@ -47,5 +46,3 @@ void Singleton<T>::destroy()
 
 } // namespace templates
 } // namespace amoamo
-
-#endif // _AMOAMO_SINGLETON_H

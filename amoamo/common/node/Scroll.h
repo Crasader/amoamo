@@ -1,5 +1,4 @@
-#ifndef AMOAMO_COMMON_NODE_SCROLL_H
-#define AMOAMO_COMMON_NODE_SCROLL_H
+#pragma once
 
 #include <iostream>
 #include "cocos2d.h"
@@ -20,5 +19,3 @@ public:
 }// namespace node
 }// namespace common
 }// namespace amoamo
-
-#endif /* defined(AMOAMO_COMMON_NODE_SCROLL_H) */

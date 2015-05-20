@@ -1,5 +1,4 @@
-#ifndef AMOAMO_COMMON_NETWORK_DEBUG_H
-#define AMOAMO_COMMON_NETWORK_DEBUG_H
+#pragma once
 
 #include <iostream>
 
@@ -45,5 +44,3 @@ public:
 }// namespace network
 }// namespace common
 }// namespace amoamo
-
-#endif /* defined(AMOAMO_COMMON_NETWORK_DEBUG_H) */

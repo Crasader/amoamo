@@ -1,8 +1,6 @@
-#include "amoamo/definition.h"
-#ifdef AMOAMO_ENABLE_GAME_CENTER
+#pragma once
 
-#ifndef AMOAMO_GAMECENTER_H
-#define AMOAMO_GAMECENTER_H
+#include "amoamo/definition.h"
 
 namespace amoamo {
 
@@ -22,6 +20,3 @@ public:
     };
     
 } // namespace amoamo
-
-#endif /* AMOAMO_GAMECENTER_H */
-#endif /* AMOAMO_ENABLE_GAME_CENTER */
