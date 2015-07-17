@@ -7,9 +7,12 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 
 import android.util.Log;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.content.Context;
 import android.content.Intent;
 
 import org.cocos2dx.lib.Cocos2dxActivity;
@@ -17,8 +20,10 @@ import org.cocos2dx.lib.Cocos2dxActivity;
 public abstract class Device
 {
     //private static final Cocos2dxActivity activity = (Cocos2dxActivity)Cocos2dxActivity.getContext();
-    public static boolean isConnected()
+    public static boolean isConnectedInternet()
     {
+    	return true;
+    	/*
         ConnectivityManager connectivity = (ConnectivityManager) NativeUtility.getMainActivity().getApplicationContext().
         getSystemService(Context.CONNECTIVITY_SERVICE);
         if (connectivity != null)
@@ -32,5 +37,6 @@ public abstract class Device
                     }
         }
         return false;
+        */
     }
 }

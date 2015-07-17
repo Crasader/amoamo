@@ -1,7 +1,7 @@
 #include "amoamo/common/scene/Message.h"
 
 #include "cocostudio/CocoStudio.h"
-#include "cocosGUI.h"
+#include "ui/cocosGUI.h"
 
 USING_NS_CC;
 using namespace ui;

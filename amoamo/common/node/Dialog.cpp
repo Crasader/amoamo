@@ -1,6 +1,6 @@
 #include "amoamo/common/node/Dialog.h"
 #include "cocostudio/CocoStudio.h"
-#include "cocosGUI.h"
+#include "ui/cocosGUI.h"
 #include "Util.h"
 
 namespace amoamo {

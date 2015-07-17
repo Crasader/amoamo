@@ -8,10 +8,11 @@
 namespace amoamo {
     
     const char* const CLASS_NAME = "amoamo/device/Device";
-    
-    void Device::isConnectedInternet(const char* tweet) {
-        JniMethodInfo minfo;
-        CCAssert(JniHelper::getStaticMethodInfo(minfo, CLASS_NAME, "isConnected", "()Z"), "Function doesn't exist");
+
+    bool Device::isConnectedInternet() {
+    	return true;
+    	cocos2d::JniMethodInfo minfo;
+        CCAssert(cocos2d::JniHelper::getStaticMethodInfo(minfo, CLASS_NAME, "isConnectedInternet", "()Z"), "Function doesn't exist");
         return minfo.env->CallStaticBooleanMethod(minfo.classID, minfo.methodID);
     }
 

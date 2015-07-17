@@ -1,5 +1,5 @@
 #include "cocostudio/CocoStudio.h"
-#include "cocosGUI.h"
+#include "ui/cocosGUI.h"
 #include "amoamo/common/node/Util.h"
 #include "amoamo/common/layer/InputLayer.h"
 

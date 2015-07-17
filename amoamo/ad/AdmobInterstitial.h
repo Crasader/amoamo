@@ -1,5 +1,4 @@
 #include "amoamo/definition.h"
-//#ifdef AMOAMO_ENABLE_SERVICE_TWITTER
 
 #ifndef AMOAMO_ADMOB_INTERSTITIAL_H
 #define AMOAMO_ADMOB_INTERSTITIAL_H

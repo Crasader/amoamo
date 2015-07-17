@@ -1,7 +1,7 @@
 #include "amoamo/common/node/Util.h"
 #include "amoamo/common/node/ui/EditBox.h"
 #include "cocostudio/CocoStudio.h"
-#include "cocosGUI.h"
+#include "ui/cocosGUI.h"
 #include <typeinfo>
 #include <future>
 

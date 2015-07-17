@@ -1,6 +1,5 @@
 #include "amoamo/definition.h"
 #ifdef AMOAMO_PLATFORM_IS_ANDROID
-#ifdef AMOAMO_ENABLE_SERVICE_TWITTER
 
 #include "amoamo/Twitter.h"
 #include <jni.h>
@@ -40,13 +39,12 @@ namespace twitter {
         }
     }
     
-} /* helper */
 } /* twitter */
+} /* helper */
     
     void Twitter::tweet(const char* tweet) {
         amoamo::helper::twitter::callStaticVoidMethodWithString("tweet", tweet);
     }
-    
     
     void Twitter::tweetWithScreenShot(const char* tweet, const char *file_path) {
         amoamo::helper::twitter::callStaticVoidMethodWithStringAndString("tweetWithScreenShot", tweet, file_path);
@@ -54,5 +52,4 @@ namespace twitter {
 
 }/* amoamo */
 
-#endif /* AMOAMO_ENABLE_SERVICE_TWITTER */
 #endif /* AMOAMO_PLATFORM_IS_ANDROID */
