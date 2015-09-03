@@ -5,8 +5,8 @@
 #include "AdmobInterstitial.h"
 
 #import <UIKit/UIKit.h>
-#import "GADInterstitial.h"
-#import "GADInterstitialDelegate.h"
+#import <GoogleMobileAds/GADInterstitial.h>
+#import <GoogleMobileAds/GADInterstitialDelegate.h>
 #import "AppController.h"
 
 // https://developers.google.com/mobile-ads-sdk/docs/admob/ios/interstitial
@@ -37,7 +37,7 @@ static GADInterstitialViewHolder* instance = [[GADInterstitialViewHolder alloc] 
     self.interstitial.adUnitID = self.adUnitId;
     self.interstitial.delegate = self;
     GADRequest *request = [GADRequest request];
-    request.testDevices = @[ GAD_SIMULATOR_ID ];
+    //request.testDevices = @[ GAD_SIMULATOR_ID ];
     [self.interstitial loadRequest:request];
     return self.interstitial;
 }

@@ -5,7 +5,7 @@
 #include "AdmobBanner.h"
 
 #import <UIKit/UIKit.h>
-#import "GADBannerView.h"
+#import <GoogleMobileAds/GADBannerView.h>
 #import "AppController.h"
 
 using namespace std;
@@ -55,7 +55,7 @@ namespace ad {
         bannerView.adUnitID = [NSString stringWithUTF8String:adUnitId.c_str()];
         bannerView.rootViewController = [[[UIApplication sharedApplication] keyWindow] rootViewController];
         GADRequest *request = [GADRequest request];
-        request.testDevices = @[ GAD_SIMULATOR_ID ];
+        //request.testDevices = @[ GAD_SIMULATOR_ID ];
         [bannerView loadRequest:request];
         [controller.view addSubview:bannerView];
         [bannerView setRootViewController:(UIViewController *)appController.viewController];
