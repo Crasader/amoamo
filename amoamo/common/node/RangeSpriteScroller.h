@@ -18,7 +18,12 @@ namespace node {
         bool enableRewindY;
     public:
         void scroll(const Vec2 &factor) override;
-        RangeSpriteScroller(Rect rect);
+        /**
+         * スクロール範囲は動的に定めたいので初期値で決めるようにしたくない
+         */
+        RangeSpriteScroller();
+        
+        void setScrollRange(const Rect rect);
         
         void setEnableRewindX(bool boolean);
         void setEnableRewindY(bool boolean);

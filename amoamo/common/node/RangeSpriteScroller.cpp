@@ -4,7 +4,12 @@ namespace amoamo {
 namespace common {
 namespace node {
     
-    RangeSpriteScroller::RangeSpriteScroller(Rect rect):enableRewindX(true),enableRewindY(true) {
+    RangeSpriteScroller::RangeSpriteScroller():enableRewindX(true),enableRewindY(true) {
+        this->rect = Rect();
+    }
+    
+    
+    void RangeSpriteScroller::setScrollRange(const Rect rect) {
         this->rect = rect;
     }
     
