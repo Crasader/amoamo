@@ -105,6 +105,30 @@ namespace node {
         return node;
     }
     
+    
+    void Util::addRecursiveGlobalZOrder(cocos2d::Node* targetNode, int zOrder) {
+        for (auto node : targetNode->getChildren()) {
+            /*
+            auto sprite = dynamic_cast<cocos2d::Sprite*>(node);
+            if (nullptr != sprite) {
+                sprite->setGlobalZOrder(zOrder + sprite->getLocalZOrder());
+            }
+             */
+            node->setGlobalZOrder(zOrder + node->getLocalZOrder());
+            addRecursiveGlobalZOrder(node, zOrder);
+        }
+    }
+    
+    void Util::setRecursiveAliasTexParameters(cocos2d::Node* targetNode) {
+        for (auto node : targetNode->getChildren()) {
+            auto sprite = dynamic_cast<cocos2d::Sprite*>(node);
+            if (nullptr != sprite) {
+                sprite->getTexture()->setAliasTexParameters();
+            }
+            setRecursiveAliasTexParameters(node);
+        }
+    }
+    
 }// namespace node
 }// namespace common
 }// namespace amoamo

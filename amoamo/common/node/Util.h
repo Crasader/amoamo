@@ -26,9 +26,13 @@ public:
     // Label
     static void replaceLabelText(cocos2d::Node* targetNode, const char* labelName, const char* text);
     
-    // CSa
+    // CS
     static Node* loadFromCSThreadSafe(const char* resourceName);
     static Node* loadFromCS(const char* resourceName);
+    
+    // recursive settings
+    static void addRecursiveGlobalZOrder(cocos2d::Node* targetNode, int zOrder);
+    static void setRecursiveAliasTexParameters(cocos2d::Node* targetNode);
 };
 
 }// namespace node
