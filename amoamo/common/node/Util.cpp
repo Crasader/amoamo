@@ -81,6 +81,22 @@ namespace node {
         textNode->setString(text);
     }
     
+    void Util::replaceTextNodeToLabel(cocos2d::Node* targetNode, const char* textNodeName)
+    {
+        auto textNode = targetNode->getChildByName<cocos2d::ui::Text*>(textNodeName);
+        if (nullptr == textNode) {
+            CCLOG("text node (name:%s) not found.", textNodeName);
+            return;
+        }
+        auto label = Label::createWithTTF(textNode->getString(), textNode->getFontName(), textNode->getFontSize());
+        label->setPosition(textNode->getPosition());
+        label->setAnchorPoint(textNode->getAnchorPoint());
+        label->setColor(textNode->getColor());
+        textNode->removeFromParent();
+        targetNode->addChild(label);
+        
+    }
+    
     Node* Util::loadFromCSThreadSafe(const char* resourceName) {
         std::promise<Node*> p;
         std::future<Node*> f = p.get_future();

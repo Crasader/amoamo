@@ -24,7 +24,16 @@ public:
     static void setCallBackToButton(cocos2d::Node* targetNode, const char* buttonName, const std::function<void()> &callback);
     
     // Label
+    
+    /**
+     * TextNodeのstringを変更する
+     */
     static void replaceLabelText(cocos2d::Node* targetNode, const char* labelName, const char* text);
+    
+    /**
+     * TextNodeをLabelNodeに入れ替える(TextNodeは消える)
+     */
+    static void replaceTextNodeToLabel(cocos2d::Node* targetNode, const char* labelName);
     
     // CS
     static Node* loadFromCSThreadSafe(const char* resourceName);
