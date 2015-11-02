@@ -70,15 +70,24 @@ namespace node {
         });
     }
     
-    void Util::replaceLabelText(cocos2d::Node* targetNode, const char* labelName, const char* text) {
-        auto node = targetNode->getChildByName(labelName);
+    void Util::replaceTextString(cocos2d::Node* targetNode, const char* nodeName, const char* string) {
+        auto node = targetNode->getChildByName<cocos2d::ui::Text*>(nodeName);
         if (nullptr == node) {
-            CCLOG("label node (name:%s) not found.", labelName);
+            CCLOG("label node (name:%s) not found.", nodeName);
             return;
         }
-        auto textNode = static_cast<cocos2d::ui::Text*>(node);
-        CCLOG("label node (name:%s) set to %s", labelName, text);
-        textNode->setString(text);
+        CCLOG("label node (name:%s) set to %s", nodeName, string);
+        node->setString(string);
+    }
+    
+    void Util::replaceLabelString(cocos2d::Node* targetNode, const char* nodeName, const char* string) {
+        auto node = targetNode->getChildByName<cocos2d::Label*>(nodeName);
+        if (nullptr == node) {
+            CCLOG("label node (name:%s) not found.", nodeName);
+            return;
+        }
+        CCLOG("label node (name:%s) set to %s", nodeName, string);
+        node->setString(string);
     }
     
     void Util::replaceTextNodeToLabel(cocos2d::Node* targetNode, const char* textNodeName)
@@ -93,7 +102,7 @@ namespace node {
         label->setAnchorPoint(textNode->getAnchorPoint());
         label->setColor(textNode->getColor());
         textNode->removeFromParent();
-        targetNode->addChild(label);
+        targetNode->addChild(label, textNode->getLocalZOrder(), textNodeName);
         
     }
     

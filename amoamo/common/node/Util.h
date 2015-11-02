@@ -28,12 +28,18 @@ public:
     /**
      * TextNodeのstringを変更する
      */
-    static void replaceLabelText(cocos2d::Node* targetNode, const char* labelName, const char* text);
+    static void replaceTextString(cocos2d::Node* targetNode, const char* nameNodeText, const char* string);
     
     /**
      * TextNodeをLabelNodeに入れ替える(TextNodeは消える)
      */
-    static void replaceTextNodeToLabel(cocos2d::Node* targetNode, const char* labelName);
+    static void replaceTextNodeToLabel(cocos2d::Node* targetNode, const char* nodeName);
+    
+    
+    /**
+     * LabelNodeのstringを変更する
+     */
+    static void replaceLabelString(cocos2d::Node* targetNode, const char* nodeName, const char* string);
     
     // CS
     static Node* loadFromCSThreadSafe(const char* resourceName);

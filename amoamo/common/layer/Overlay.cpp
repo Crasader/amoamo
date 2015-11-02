@@ -16,8 +16,8 @@ namespace layer {
             baseLayer->getBoundingBox().getMidY()
         ));
         
-        node::Util::replaceLabelText(nodeDialog, "label_contents", contentText);
-        node::Util::replaceLabelText(nodeDialog, "label_title", "たいとるだよ");
+        //node::Util::replaceLabelText(nodeDialog, "label_contents", contentText);
+        //node::Util::replaceLabelText(nodeDialog, "label_title", "たいとるだよ");
         node::Util::setCallBackToButton(nodeDialog, "button_ok", [=]{
             baseLayer->removeFromParent();
         });
