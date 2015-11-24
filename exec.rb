@@ -2,7 +2,7 @@ require 'fileutils'
 
 def directories
   dir_project               = File.expand_path(File.dirname(__FILE__) + '/..')
-  dir_project_android       = dir_project + '/proj.android'
+  dir_project_android       = dir_project + '/proj.android-studio/app'
   dir_project_android_src   = dir_project_android + '/src'
   return [
   ]
@@ -11,8 +11,8 @@ end
 def symlinks
   dir_project               = File.expand_path(File.dirname(__FILE__) + '/..')
   dir_project_class         = dir_project + '/Classes'
-  dir_project_android_lib   = dir_project + '/proj.android/libs'
-  dir_project_android_src   = dir_project + '/proj.android/src'
+  dir_project_android_lib   = dir_project + '/proj.android-studio/libs'
+  dir_project_android_src   = dir_project + '/proj.android-studio/app/src'
   dir_nend          = File.expand_path(Dir.pwd + '/nend')
   dir_nend_2dx      = dir_nend + '/nendSDK_cocos2dX_Module_for_v3.2'
   dir_nend_ios      = dir_nend + '/NendSDK_iOS-2.5.5'

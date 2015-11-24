@@ -76,7 +76,7 @@ namespace node {
             CCLOG("label node (name:%s) not found.", nodeName);
             return;
         }
-        CCLOG("label node (name:%s) set to %s", nodeName, string);
+        //CCLOG("label node (name:%s) set to %s", nodeName, string);
         node->setString(string);
     }
     
@@ -86,7 +86,7 @@ namespace node {
             CCLOG("label node (name:%s) not found.", nodeName);
             return;
         }
-        CCLOG("label node (name:%s) set to %s", nodeName, string);
+        //CCLOG("label node (name:%s) set to %s", nodeName, string);
         node->setString(string);
     }
     
