@@ -12,16 +12,17 @@ class BGMObject
 {
 public:
     enum State {
-        INIT,
-        FADE_OUT,
-        FADE_IN,
-        PLAYING,
+        INIT = 0,
+        FADE_OUT = 1,
+        FADE_IN = 2,
+        PLAYING = 3,
+        END = 4,
     };
     
 private:
     BGMObject();
     virtual ~BGMObject();
-    
+
 public:
     static BGMObject* create(int32_t bgmId, bool fadeIn);
     

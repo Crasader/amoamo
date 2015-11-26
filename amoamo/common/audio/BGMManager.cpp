@@ -25,43 +25,48 @@ BGMObject::BGMObject()
 
 BGMObject::~BGMObject()
 {
+    _scheduler->unscheduleUpdate(this);
     CC_SAFE_RELEASE_NULL(_scheduler);
 }
 
 BGMObject* BGMObject::create(int32_t bgmId, bool fadeIn)
 {
     BGMObject* object = new BGMObject();
+    //log("create bgmId:%d fadeIn:%s", bgmId, fadeIn ? "true" : "false");
     if (object && object->init(bgmId, fadeIn)) {
         //object->autorelease();
-    }
-    else if (object) {
+    } else if (object) {
         delete object;
-        object = NULL;
+        object = nullptr;
     }
     return object;
 }
 
 void BGMObject::release()
 {
-    //delete this;
+    delete this;
 }
 
 bool BGMObject::init(int32_t bgmId, bool fadeIn)
 {
-    _scheduler->scheduleUpdate(this, 0, !_running);
+    _bgmId = bgmId;
+    //log("init bgmId:%d fadeIn:%s", bgmId, fadeIn ? "true" : "false");
     
     auto bgmManager = BGM_MANAGER();
-    _audioId = AudioEngine::play2d(bgmManager->getBGMList()[bgmId], true, bgmManager->getVolume());
-    if (_audioId == AudioEngine::INVALID_AUDIO_ID) return false;
+    _audioId = AudioEngine::play2d(bgmManager->getBGMList()[_bgmId], true, bgmManager->getVolume());
+    if (_audioId == AudioEngine::INVALID_AUDIO_ID) {
+        return false;
+    }
     
     if (fadeIn) {
         _timer = 0.0f;
         AudioEngine::setVolume(_audioId, 0.0f);
         _state = FADE_IN;
-    }
-    else {
+    } else {
         _state = PLAYING;
     }
+    
+    _scheduler->scheduleUpdate(this, 0, !_running);
     
     return true;
 }
@@ -83,18 +88,18 @@ void BGMObject::update(float delta)
         }
         
         AudioEngine::setVolume(_audioId, SoundManager::getInstance()->getBGMManager()->getVolume() * (_timer / _fadeTime));
-    }
-    else if (_state == FADE_OUT) {
+    } else if (_state == FADE_OUT) {
         if (_timer >= _fadeTime) {
             _timer = _fadeTime;
+            //log("_state == FADE_OUT bgmId:%d", _bgmId);
+            _state = END;
             stop(false);
-        }
-        else {
+            //delete this;
+        } else {
             AudioEngine::setVolume(_audioId, SoundManager::getInstance()->getBGMManager()->getVolume() * ((_fadeTime - _timer) / _fadeTime));
         }
-    }
-    else {
-        
+    } else {
+        // 再生中(なにもしない)
     }
 }
 
@@ -103,13 +108,15 @@ void BGMObject::stop(bool fadeOut)
     if (_audioId != AudioEngine::INVALID_AUDIO_ID) {
         if (!fadeOut) {
             AudioEngine::stop(_audioId);
+            //log("AudioEngine::stop timer:%f, seID:%d", _timer, _bgmId);
             CC_SAFE_RELEASE(this);
-        }
-        else {
+        } else {
+            //log("AudioEngine::start fadeOut timer:%f, seID:%d", _timer, _bgmId);
             _state = FADE_OUT;
             _timer = 0.0f;
         }
     }
+    
 }
 
 void BGMObject::pause()
@@ -170,10 +177,11 @@ bool BGMManager::init()
 
 void BGMManager::play(int32_t bgmId, bool isCrossFade)
 {
-    if (_object == NULL) {
+    //log("BGMManager::play bgmId:%d", bgmId);
+    if (_object == nullptr) {
         _object = BGMObject::create(bgmId, false);
-    }
-    else {
+    } else {
+        //log("AudioEngine::stop on Crossfade: %s", isCrossFade ? "true": "false");
         _object->stop(isCrossFade);
         _object = BGMObject::create(bgmId, isCrossFade);
     }
