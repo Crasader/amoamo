@@ -100,10 +100,9 @@ namespace node {
         auto label = Label::createWithTTF(textNode->getString(), textNode->getFontName(), textNode->getFontSize());
         label->setPosition(textNode->getPosition());
         label->setAnchorPoint(textNode->getAnchorPoint());
-        label->setColor(textNode->getColor());
+        label->setTextColor(textNode->getTextColor());
         textNode->removeFromParent();
         targetNode->addChild(label, textNode->getLocalZOrder(), textNodeName);
-        
     }
     
     Node* Util::loadFromCSThreadSafe(const char* resourceName) {
