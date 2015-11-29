@@ -186,6 +186,14 @@ void BGMManager::play(int32_t bgmId, bool isCrossFade)
         _object = BGMObject::create(bgmId, isCrossFade);
     }
 }
+    
+void BGMManager::playContinue(int32_t bgmId, bool isCrossFade)
+{
+    if (bgmId == _object->getBgmId()) {
+        return;
+    }
+    this->play(bgmId, isCrossFade);
+}
 
 void BGMManager::stop(bool fade)
 {

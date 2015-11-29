@@ -10,6 +10,7 @@ namespace audio {
 
 class BGMObject
 {
+CC_SYNTHESIZE_READONLY(int32_t, _bgmId, BgmId)
 public:
     enum State {
         INIT = 0,
@@ -48,7 +49,6 @@ private:
     
     State _state;
     int32_t _audioId;
-    int32_t _bgmId;
     float _timer;
 };
 
@@ -77,6 +77,7 @@ private:
     
 public:
     void play(int32_t bgmId, bool isCrossFade = false);
+    void playContinue(int32_t bgmId, bool isCrossFade = false);
     void stop(bool fade);
     void pause();
     void resume();
