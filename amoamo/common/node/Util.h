@@ -28,7 +28,7 @@ public:
     /**
      * TextNodeのstringを変更する
      */
-    static void replaceTextString(cocos2d::Node* targetNode, const char* nameNodeText, const char* string);
+    static void replaceTextString(cocos2d::Node* targetNode, const char* nameNodeText, const std::string &string);
     
     /**
      * TextNodeをLabelNodeに入れ替える(TextNodeは消える)
@@ -39,7 +39,7 @@ public:
     /**
      * LabelNodeのstringを変更する
      */
-    static void replaceLabelString(cocos2d::Node* targetNode, const char* nodeName, const char* string);
+    static void replaceLabelString(cocos2d::Node* targetNode, const char* nodeName, const std::string &string);
     
     // CS
     static Node* loadFromCSThreadSafe(const char* resourceName);

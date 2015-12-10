@@ -70,7 +70,7 @@ namespace node {
         });
     }
     
-    void Util::replaceTextString(cocos2d::Node* targetNode, const char* nodeName, const char* string) {
+    void Util::replaceTextString(cocos2d::Node* targetNode, const char* nodeName, const std::string &string) {
         auto node = targetNode->getChildByName<cocos2d::ui::Text*>(nodeName);
         if (nullptr == node) {
             CCLOG("label node (name:%s) not found.", nodeName);
@@ -80,7 +80,7 @@ namespace node {
         node->setString(string);
     }
     
-    void Util::replaceLabelString(cocos2d::Node* targetNode, const char* nodeName, const char* string) {
+    void Util::replaceLabelString(cocos2d::Node* targetNode, const char* nodeName, const std::string &string) {
         auto node = targetNode->getChildByName<cocos2d::Label*>(nodeName);
         if (nullptr == node) {
             CCLOG("label node (name:%s) not found.", nodeName);
@@ -148,6 +148,18 @@ namespace node {
             auto sprite = dynamic_cast<cocos2d::Sprite*>(node);
             if (nullptr != sprite) {
                 sprite->getTexture()->setAliasTexParameters();
+            }
+            auto button = dynamic_cast<cocos2d::ui::Button*>(node);
+            if (nullptr != button) {
+                if (nullptr != button->getRendererNormal()->getSprite()) {
+                    button->getRendererNormal()->getSprite()->getTexture()->setAliasTexParameters();
+                }
+                if (nullptr != button->getRendererDisabled()->getSprite()) {
+                    button->getRendererDisabled()->getSprite()->getTexture()->setAliasTexParameters();
+                }
+                if (nullptr != button->getRendererClicked()->getSprite()) {
+                    button->getRendererClicked()->getSprite()->getTexture()->setAliasTexParameters();
+                }
             }
             setRecursiveAliasTexParameters(node);
         }
