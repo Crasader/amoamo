@@ -70,6 +70,28 @@ namespace node {
         });
     }
     
+    void Util::setCallBackToLayerdButton(cocos2d::Node* targetNode, const char* nameNodeButtonLayerd, const char* nameInnerNodeButton, const std::function<void()> &callback) {
+        auto node = targetNode->getChildByName(nameNodeButtonLayerd);
+        if (node == nullptr) {
+            CCLOG("node (name:%s) not found.", nameNodeButtonLayerd);
+            return;
+        }
+        Util::setCallBackToButton(node, nameInnerNodeButton, callback);
+    }
+    
+    void Util::setCallBackToText(cocos2d::Node* targetNode, const char* nodeName, const std::function<void()> &callback) {
+        auto node = targetNode->getChildByName<cocos2d::ui::Text*>(nodeName);
+        if (nullptr == node) {
+            CCLOG("cocos2d::ui::Text* node (name:%s) not found.", nodeName);
+            return;
+        }
+        node->setTouchEnabled(true);
+        node->addTouchEventListener([=](Ref*, cocos2d::ui::Widget::TouchEventType type){
+            if (type != cocos2d::ui::Widget::TouchEventType::ENDED) {return;}
+            callback();
+        });
+    }
+    
     void Util::replaceTextString(cocos2d::Node* targetNode, const char* nodeName, const std::string &string) {
         auto node = targetNode->getChildByName<cocos2d::ui::Text*>(nodeName);
         if (nullptr == node) {
