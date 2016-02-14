@@ -63,10 +63,33 @@ namespace node {
         button->addTouchEventListener(callback);
     }
     
-    void Util::setCallBackToButton(cocos2d::Node* targetNode, const char* buttonName, const std::function<void()> &callback) {
-        setCallBackToButton(targetNode, buttonName, [=](Ref*, cocos2d::ui::Widget::TouchEventType type){
-            if (type != cocos2d::ui::Widget::TouchEventType::ENDED) {return;}
-            callback();
+    void Util::setCallBackToButton(cocos2d::Node* targetNode, const char* buttonName, const std::function<void()> &callbackBegan) {
+        Util::setCallBackToButton(targetNode, buttonName, [=](Ref*, cocos2d::ui::Widget::TouchEventType type){
+            switch (type) {
+                case cocos2d::ui::Widget::TouchEventType::BEGAN:
+                    callbackBegan();
+                    break;
+                default:
+                    break;
+            }
+        });
+    }
+    
+    void Util::setCallBackToButton(cocos2d::Node* targetNode, const char* buttonName,
+                                    const std::function<void()> &callbackBegan,
+                                    const std::function<void()> &callbackEnd
+                                   ) {
+        Util::setCallBackToButton(targetNode, buttonName, [=](Ref*, cocos2d::ui::Widget::TouchEventType type){
+            switch (type) {
+                case cocos2d::ui::Widget::TouchEventType::BEGAN:
+                    callbackBegan();
+                    break;
+                case cocos2d::ui::Widget::TouchEventType::ENDED:
+                    callbackEnd();
+                    break;
+                default:
+                    break;
+            }
         });
     }
     
@@ -145,7 +168,7 @@ namespace node {
     }
     
     Node* Util::loadFromCS(const char* resourceName) {
-        CSLoader::getInstance()->setRecordJsonPath(true);
+        //CSLoader::getInstance()->setRecordJsonPath(true);
         auto node = CSLoader::getInstance()->createNode(resourceName);
         node->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
         return node;

@@ -21,7 +21,13 @@ public:
     
     // Button
     static void setCallBackToButton(cocos2d::Node* targetNode, const char* buttonName, const cocos2d::ui::Widget::ccWidgetTouchCallback &callback);
-    static void setCallBackToButton(cocos2d::Node* targetNode, const char* buttonName, const std::function<void()> &callback);
+    static void setCallBackToButton(cocos2d::Node* targetNode, const char* buttonName,
+                                    const std::function<void()> &callbackBegan);
+    
+    static void setCallBackToButton(cocos2d::Node* targetNode, const char* buttonName,
+                                    const std::function<void()> &callbackBegan,
+                                    const std::function<void()> &callbackEnd
+                                    );
     
     static void setCallBackToLayerdButton(cocos2d::Node* targetNode, const char* nameNodeButtonLayerd, const char* nameInnerNodeButton, const std::function<void()> &callback);
     
